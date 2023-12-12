@@ -6,9 +6,11 @@ btn.textContent = 'Create new grid';
 btnContainer.classList.add('resetBtn');
 btnContainer.append(btn);
 
-let size = 10;
+let size = 5;
 
 const createGrid = (size) => {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wrapper');
     for (i=0; i < (size); i++){
         const row = document.createElement('div');
         row.classList.add('grid-row');
@@ -26,11 +28,25 @@ const createGrid = (size) => {
             row.appendChild(gridCol);
         }
         
-        container.appendChild(row);
+        wrapper.appendChild(row);
     }
+    container.appendChild(wrapper);
 }
 
 createGrid(size);
+
+btn.addEventListener('click', () => {
+    let userInput = Number(prompt('Enter # of squares per side (Max 100; Min 2)'));
+   
+    while (userInput > 100 ){
+    userInput = Number(prompt('Cannot exceed 100'));
+    }
+
+    const wrapper = document.querySelector('.wrapper');
+    wrapper.remove();
+    createGrid(userInput);
+});
+
 
 // Original Idea  
 // function createGrid(gridSize) {
